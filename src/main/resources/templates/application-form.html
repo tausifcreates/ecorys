@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Unemployment Allowance Application')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<h1>Unemployment Allowance Application</h1>
+
+<p class="success" th:if="${submittedId}" th:text="|Application #${submittedId} submitted.|"></p>
+
+<form class="application-form" th:action="@{/applications}" th:object="${form}" method="post">
+    <p class="error" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+
+    <fieldset>
+        <legend>Worker Information</legend>
+
+        <label for="nid">NID *</label>
+        <input th:field="*{nid}" inputmode="numeric" required>
+        <div class="error" th:if="${#fields.hasErrors('nid')}" th:errors="*{nid}"></div>
+
+        <label for="name">Worker Name *</label>
+        <input th:field="*{name}" maxlength="100" required>
+        <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+        <label for="mobileNumber">Mobile Number *</label>
+        <input type="tel" th:field="*{mobileNumber}" placeholder="01XXXXXXXXX" required>
+        <div class="error" th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}"></div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Application Details</legend>
+
+        <label for="applicationDate">Application Date *</label>
+        <input type="date" th:field="*{applicationDate}" required>
+        <div class="error" th:if="${#fields.hasErrors('applicationDate')}" th:errors="*{applicationDate}"></div>
+
+        <label for="reason">Reason for Unemployment *</label>
+        <textarea th:field="*{reason}" rows="4" maxlength="500" required></textarea>
+        <div class="error" th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}"></div>
+    </fieldset>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

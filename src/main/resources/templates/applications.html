@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Review Applications')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<h1>Review Applications</h1>
+
+<p class="success" th:if="${message}" th:text="${message}"></p>
+<p class="error" th:if="${error}" th:text="${error}"></p>
+
+<p th:if="${applications.isEmpty()}">No applications yet.</p>
+
+<div class="table-wrap" th:unless="${applications.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>Application ID</th>
+            <th>NID</th>
+            <th>Worker Name</th>
+            <th>Mobile Number</th>
+            <th>Application Date</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Approval Date</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="a : ${applications}">
+            <td th:text="${a.id}"></td>
+            <td th:text="${a.worker.nid}"></td>
+            <td th:text="${a.worker.name}"></td>
+            <td th:text="${a.worker.mobileNumber}"></td>
+            <td th:text="${a.applicationDate}"></td>
+            <td th:text="${a.reason}"></td>
+            <td th:text="${a.status.label}"></td>
+            <td th:text="${a.approvalDate}"></td>
+            <td>
+                <form th:if="${a.pending}" th:action="@{/applications/{id}/approve(id=${a.id})}" method="post">
+                    <button type="submit">Approve</button>
+                    <button type="submit" th:formaction="@{/applications/{id}/reject(id=${a.id})}">Reject</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

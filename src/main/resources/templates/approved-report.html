@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Approved Applications Report')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<h1>Approved Applications Report</h1>
+
+<p th:text="|Total approved: ${rows.size()}|"></p>
+
+<div class="table-wrap" th:unless="${rows.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>Application ID</th>
+            <th>Worker Name</th>
+            <th>NID</th>
+            <th>Application Date</th>
+            <th>
+                <a th:href="@{/reports/approved-applications(sort=${asc} ? 'desc' : 'asc')}"
+                   th:text="|Approval Date ${asc ? '▲' : '▼'}|"></a>
+            </th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${rows}">
+            <td th:text="${row.applicationId}"></td>
+            <td th:text="${row.workerName}"></td>
+            <td th:text="${row.nid}"></td>
+            <td th:text="${row.applicationDate}"></td>
+            <td th:text="${row.approvalDate}"></td>
+            <td th:text="${row.status.label}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
