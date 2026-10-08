@@ -1,0 +1,10 @@
+body { font-family: sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+fieldset { margin-bottom: 1rem; }
+label { display: block; margin-top: .75rem; }
+.application-form { max-width: 600px; }
+.application-form input, .application-form textarea { width: 100%; box-sizing: border-box; padding: .4rem; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #ccc; padding: .5rem; text-align: left; vertical-align: top; }
+.error { color: #c00; }
+.success { color: #070; }
