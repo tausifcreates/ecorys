@@ -34,7 +34,9 @@ The application starts on port 8080.
 
 Screens can be accessible from:
 http://localhost:8080/    -> Submit an application
+
 http://localhost:8080/applications    ->  Review, approve or reject applications
+
 http://localhost:8080/reports/approved-applications   ->  Approved applications report
 
 Database schema
